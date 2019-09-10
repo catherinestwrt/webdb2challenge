@@ -12,7 +12,19 @@ server.get('/', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500);
+      res.status(500).send();
+    });
+});
+
+server.post('/', (req, res) => {
+  console.log('post fun')
+  db('cars').insert(req.body)
+    .then(dbRes => {
+      res.status(201).send();
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send();
     });
 });
 
