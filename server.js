@@ -28,4 +28,16 @@ server.post('/', (req, res) => {
     });
 });
 
+server.get('/:id', (req, res) => {
+  db('cars').where('vin', req.params.id).select()
+    .then(dbRes => {
+      console.log(dbRes);
+      res.status(200).send({car: dbRes[0]});
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send();
+    });
+})
+
 module.exports = server;
